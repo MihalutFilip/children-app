@@ -1,0 +1,69 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.btn-outline-success:active, .btn-outline-success.active, .show > .btn-outline-success.dropdown-toggle {
+    background-color: #34A835 !important;
+    border-color: #34A835 !important;
+}
+
+.btn-outline-success:hover {
+    background-color: #34A835 !important;
+    border-color: #34A835 !important;
+}
+
+.btn-outline-success {
+    color: #34A835;
+    border-color: #34A835;
+}
+
+.cdk-overlay-container { 
+    z-index: 1200 !important; 
+}
+
+.selected-item {
+    border: 1px solid #a600ad !important;
+    background: #a600ad !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox]:checked + div:before {
+    background: #a600ad !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox] + div:before {
+    color: #a600ad !important;
+    border: 2px solid #a600ad !important;
+}
+
+.white-color {
+    background-color: white !important;
+    color: black !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed !important;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.modal-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: hidden;
+    min-height: calc(100vh - 60px);
+  }
+  @media (max-width: 767px) {
+    .modal-dialog {
+      min-height: calc(100vh - 20px);
+    }
+  }
+
+.multiselect-dropdown {
+    max-width: 468px;
+}
