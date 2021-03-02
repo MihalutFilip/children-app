@@ -1,0 +1,6 @@
+<p-dropdown [options]="reportTypes" [(ngModel)]="selectedReport" optionLabel="name" [style]="{'margin-right':'10px'}" (onChange)="onChange()"></p-dropdown>
+<p-dropdown *ngIf="!evolutionOfAChildSelected" [options]="groups" [(ngModel)]="selectedGroup" optionLabel="name" (onChange)="onChange()" [style]="{'margin-right':'10px'}"></p-dropdown>
+<p-dropdown *ngIf="customFieldSelected" [options]="years" [(ngModel)]="selectedYear" optionLabel="value" (onChange)="onChange()"></p-dropdown>
+<p-dropdown *ngIf="evolutionOfAChildSelected" [options]="children" [(ngModel)]="selectedChildren" optionLabel="name" (onChange)="onChange()"></p-dropdown>
+<br><br><br><br>
+<chart [options]="options" *ngIf="options" #chart></chart>

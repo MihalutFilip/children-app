@@ -1,0 +1,75 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');onClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+      <!-- Calendar -->
+      <div>
+        <mat-form-field class="full-width">
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="lesson.date" disabled>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+    <!-- Lectia -->
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Lecția</mat-label>
+        <input matInput [(ngModel)]="lesson.text" id="inputName">
+      </mat-form-field>
+    </div>
+    
+  
+    <!-- Setul -->
+    <div>  
+      <mat-form-field class="full-width">
+        <mat-label>Setul</mat-label>
+        <input matInput [(ngModel)]="lesson.set">
+      </mat-form-field>
+    </div>
+  
+    <!-- Verset -->
+    <div>  
+      <mat-form-field class="full-width">
+        <mat-label>Verset</mat-label>
+        <input matInput [(ngModel)]="lesson.verse">
+      </mat-form-field>
+    </div>
+  
+    <!-- Adevăr central -->
+    <div>  
+      <mat-form-field class="full-width">
+        <mat-label>Adevăr central</mat-label>
+        <input matInput [(ngModel)]="lesson.centralTruth">
+      </mat-form-field>
+    </div>
+  
+    <!-- Lecție misionara -->
+    <div>  
+      <mat-form-field class="full-width">
+        <mat-label>Lecție misionară</mat-label>
+        <input matInput [(ngModel)]="lesson.missionaryLesson">
+      </mat-form-field>
+    </div>
+  
+    <!-- Rugaciune -->
+    <div>  
+      <mat-form-field class="full-width">
+        <mat-label>Rugăciune</mat-label>
+        <input matInput [(ngModel)]="lesson.pray">
+      </mat-form-field>
+    </div>
+  
+    </div>
+    <div class="modal-footer">
+      <button pButton type="button" label="Salvează" class="ui-button-success" (click)="onSave()"></button>
+    </div>
+  </ng-template>
+
+  <p-toast position="top-left" [baseZIndex]="700000"></p-toast>

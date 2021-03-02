@@ -1,0 +1,94 @@
+<!-- Dropdown and add lesson button -->
+<div ngbDropdown>
+  <button [ngClass]="!selectedGroup ? 'cursor-not-allowed' : 'cursor-pointer'" [disabled]="!selectedGroup" pButton
+    type="button" label="Descarcă lecții" class="ui-button-success float-right" (click)="exportCSV()"></button>
+  <button [ngClass]="!selectedGroup ? 'cursor-not-allowed' : 'cursor-pointer'" [disabled]="!selectedGroup" pButton
+    type="button" label="Adaugă lecție" class="ui-button-success mr-1 float-right" (click)="openSaveModal()"></button>
+
+  <!-- Select dropdown -->
+  <button class="btn btn-outline-success select-group cursor-pointer"
+    ngbDropdownToggle>{{selectedGroupName || 'Alege grupa'}}</button>
+  <div class="dropdown-menu" ngbDropdownMenu>
+    <button ngbDropdownItem *ngFor="let group of groups" class="white-color"
+      (click)="onChangeGroup(group)">{{group.name}}</button>
+  </div>
+</div>
+
+<!-- Tables -->
+<div class="mat-elevation-z8 mt-2">
+  <table mat-table [dataSource]="tableOfLessons">
+    <!-- date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Data </th>
+      <td mat-cell *matCellDef="let lesson"> {{formatDate(lesson.date)}} </td>
+    </ng-container>
+
+    <!-- Lectia Column -->
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef> Lecția </th>
+      <td mat-cell *matCellDef="let lesson"> {{lesson.text}} </td>
+    </ng-container>
+
+    <!-- Setul Column -->
+    <ng-container matColumnDef="set">
+      <th mat-header-cell *matHeaderCellDef> Setul </th>
+      <td mat-cell *matCellDef="let lesson"> {{lesson.set}} </td>
+    </ng-container>
+
+    <!-- Setul Column -->
+    <ng-container matColumnDef="verse">
+      <th mat-header-cell *matHeaderCellDef> Verset </th>
+      <td mat-cell *matCellDef="let lesson"> {{lesson.verse}} </td>
+    </ng-container>
+
+    <!-- Adevar Column -->
+    <ng-container matColumnDef="centralTruth">
+      <th mat-header-cell *matHeaderCellDef> Adevăr central </th>
+      <td mat-cell *matCellDef="let lesson"> {{lesson.centralTruth}} </td>
+    </ng-container>
+
+    <!-- Adevar Column -->
+    <ng-container matColumnDef="missionayLesson">
+      <th mat-header-cell *matHeaderCellDef> Lecție Misionară </th>
+      <td mat-cell *matCellDef="let lesson"> {{lesson.missionaryLesson}} </td>
+    </ng-container>
+
+    <!-- Adevar Column -->
+    <ng-container matColumnDef="pray">
+      <th mat-header-cell *matHeaderCellDef> Rugăciune</th>
+      <td mat-cell *matCellDef="let lesson"> {{lesson.pray}} </td>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let lesson">
+        <button [disabled]="!selectedGroup" title="Editeaza" type="button" class="btn btn-light"
+          (click)="openEditModal(lesson)">
+          <img [ngClass]="!selectedGroup ? 'cursor-not-allowed' : 'cursor-pointer'"
+            src="http://icons.iconarchive.com/icons/icons8/windows-8/256/Editing-Edit-icon.png" />
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let lesson">
+        <button [disabled]="!selectedGroup" title="Sterge" type="button" class="btn btn-light"
+          (click)="openConfirmationModal(lesson)">
+          <img [ngClass]="!selectedGroup ? 'cursor-not-allowed' : 'cursor-pointer'"
+            src="https://cdn2.iconfinder.com/data/icons/e-business-helper/240/627249-delete3-512.png" />
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+<p-toast position="top-left"></p-toast>
+<app-lesson-modal [lesson]="currentLesson" [isModalOpen]="isModalOpen" (onCloseModal)="onSave($event)">
+</app-lesson-modal>

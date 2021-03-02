@@ -1,0 +1,28 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');onClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Nume" [(ngModel)]="group.name">
+    </div>
+
+    <div class="mt-2">  
+        <ng-multiselect-dropdown
+        [placeholder]="'Metode de punctare'"
+        [data]="customFields"
+        [(ngModel)]="group.customFields"
+        [settings]="dropdownSettings">
+      </ng-multiselect-dropdown>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <button pButton type="button" label="Salvează" class="ui-button-success" (click)="onSave()"></button>
+    </div>
+  </ng-template>
+
+  <p-toast position="top-left" [baseZIndex]="700000"></p-toast>

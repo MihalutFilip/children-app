@@ -1,0 +1,17 @@
+<div class="navbar-application">
+  <a class="cursor-pointer" (click)="changePage(navigation.Home)">Acasă</a>
+  <a class="cursor-pointer" (click)="changePage(navigation.Groups)">Grupe</a>
+  <a class="cursor-pointer" (click)="changePage(navigation.Lessons)">Lecții</a>
+  <a class="cursor-pointer" (click)="changePage(navigation.Reports)">Rapoarte</a>
+</div>
+
+<img class="child-img" src="../assets/images/children.jpg" />
+<div class="components-switch" [ngSwitch]="navigationSelected">
+  <app-home *ngSwitchCase="navigation.Home"></app-home>
+  <app-groups [lessons]="lessons" [scores]="scores" [customFields]="customFields" [children]="children"
+    [groups]="groups" *ngSwitchCase="navigation.Groups" (onGroupsChanges)="onExportDates()"></app-groups>
+  <app-history [lessons]="lessons" [groups]="groups" [scores]="scores" *ngSwitchCase="navigation.Lessons"
+    (onLessonsChanges)="onExportDates()"></app-history>
+  <app-reports [children]="children" [scores]="scores" [groups]="groups" *ngSwitchCase="navigation.Reports">
+  </app-reports>
+</div>

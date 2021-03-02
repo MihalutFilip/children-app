@@ -1,0 +1,48 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Adăugare punctaje</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');onClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>  
+          <ng-multiselect-dropdown
+          [placeholder]="'Grupa'"
+          [data]="groups"
+          [(ngModel)]="selectedGroup"
+          [settings]="groupDropdownSettings"
+          (onSelect)="onGroupSelect()">
+        </ng-multiselect-dropdown>
+      </div>
+
+      <div *ngIf="isGroupSelected" class="mt-2">  
+        <ng-multiselect-dropdown
+          [placeholder]="'Copii'"
+          [data]="children"
+          [(ngModel)]="selectedChildren"
+          [settings]="childrenDropdownSettings">
+        </ng-multiselect-dropdown>
+      </div>
+
+      <div *ngIf="isGroupSelected" class="mt-2">  
+        <ng-multiselect-dropdown
+          [placeholder]="'Lecție'"
+          [data]="lessons"
+          [(ngModel)]="selectedLesson"
+          [settings]="lessonDropdownSettings">
+      </ng-multiselect-dropdown>
+      </div>    
+
+      <div *ngIf="isGroupSelected">
+        <div *ngFor="let customField of customFields; let i = index; trackBy: trackByFn">
+          <input type="number" class="form-control mt-2" placeholder="{{customField.name}}" [(ngModel)]="customField.value"/>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button pButton type="button" label="Salvează" class="ui-button-success" (click)="onSave()"></button>
+    </div>
+  </ng-template>
+
+  <p-toast position="top-left" [baseZIndex]="7000"></p-toast>

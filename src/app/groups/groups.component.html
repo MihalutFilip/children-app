@@ -1,0 +1,45 @@
+<div class="mb-2">
+  <button pButton type="button" label="Adaugă grupa" class="ui-button-success" (click)="addGroup()"></button>
+  <button pButton type="button" label="Adaugă metoda de punctare" class="ui-button-success ml-1 float-right" (click)="addCumstomField()"></button>
+  <button pButton type="button" label="Adaugă punctaje" class="ui-button-success ml-1 float-right" (click)="addScores()"></button>
+</div>
+
+<div class="list-group">
+  <div *ngFor="let group of groups">
+    <div class="group-row cursor-pointer" (click)="showOrHideTable(group)" title="Da click pentru a vedea copiii">
+      {{group.name}}
+      <span class="badge badge-primary badge-pill">{{group.children.length}} copii</span>
+
+      <button title="Șterge grupa" type="button" class="btn btn-light float-right ml-2"
+        (click)="deleteGroup(group);$event.stopPropagation()">
+        <img src="https://cdn2.iconfinder.com/data/icons/e-business-helper/240/627249-delete3-512.png" />
+      </button>
+      <button title="Șterge punctajele" type="button" class="btn btn-light float-right ml-2"
+        (click)="clearScores(group);$event.stopPropagation()">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSfIu72Yl4jgMZNnrO4jbHq7NXdEPZBMVZPQ2bNaK0yNp7N-xcI" />
+      </button>   
+      <button title="Editează" type="button" class="btn btn-light float-right ml-2"
+        (click)="editGroup(group);$event.stopPropagation()">
+        <img src="http://icons.iconarchive.com/icons/icons8/windows-8/256/Editing-Edit-icon.png" />
+      </button>
+      <button title="Descarca" type="button" class="btn btn-light float-right ml-2"
+        (click)="exportCSV(group);$event.stopPropagation()">
+        <img
+          src="https://cdn.icon-icons.com/icons2/936/PNG/512/download-to-storage-drive_icon-icons.com_73590.png" />
+      </button>
+    </div>
+    <app-children [group]="group" [children]="group.children" (onChildAdded)="onChildAdded($event)" (onChildDeleted)="onChildDeleted($event)" (onChildrenChanges)="onAnyChange()"></app-children>
+  </div>
+</div>
+
+<p-toast position="top-left"></p-toast>
+
+<app-group-modal [customFields]="customFields" [group]="currentGroup" [isModalOpen]="isGroupModalOpen"
+  (onCloseModal)="onGroupSave($event)"></app-group-modal>
+
+<app-scores-modal [groups]="groups" [isModalOpen]="isScoreModalOpen" (onCloseModal)="onScoresSave($event)">
+</app-scores-modal>
+
+<app-custom-field-modal [isModalOpen]="isCustomFiledModalOpen" (onCloseModal)="onCustomFieldSave($event)">
+</app-custom-field-modal>

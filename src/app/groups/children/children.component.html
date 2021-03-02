@@ -1,0 +1,58 @@
+<div *ngIf="group.isExpanded" class="hidden-table">
+    <div class="mat-elevation-z8">
+      <table class="full-width" mat-table [dataSource]="childrenTable">  
+            <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef>
+                  <button title="Adaugă copil" type="button" class="btn btn-light cursor-pointer" (click)="addChild()">
+                    <ngx-avatar name="+" size="30" bgColor="#34A835" textSizeRatio="1"></ngx-avatar>
+                  </button>
+                </th>
+                <td mat-cell *matCellDef="let child"> 
+                    <ngx-avatar name="{{child.name}}" size="30" bgColor="{{child.iconColor}}"></ngx-avatar>
+                </td>
+            </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nume </th>
+            <td mat-cell *matCellDef="let child"> {{child.name}} </td>
+          </ng-container>
+
+          <ng-container *ngFor="let mark of displayedCustomFields; let i = index" matColumnDef="{{mark}}">
+            <th mat-header-cell *matHeaderCellDef> {{mark}} </th>
+            <td mat-cell *matCellDef="let child"> {{child.marks[i].value}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Total </th>
+            <td mat-cell *matCellDef="let child"> {{child.sumOfMarks}} </td>
+          </ng-container>
+
+          <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let child">        
+            <button title="Editează" type="button" class="btn btn-light" (click)="editChild(child)">
+              <img src="http://icons.iconarchive.com/icons/icons8/windows-8/256/Editing-Edit-icon.png"/>
+            </button> 
+          </td>
+        </ng-container>
+
+       <!-- Delete Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let child">        
+            <button title="Sterge" type="button" class="btn btn-light" (click)="deleteChild(child)">
+              <img src="https://cdn2.iconfinder.com/data/icons/e-business-helper/240/627249-delete3-512.png"/> 
+            </button> 
+          </td>
+        </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+  <p-toast position="top-left"></p-toast>
+  <app-child-modal [child]="currentChild" [isModalOpen]="isChildModalOpen" (onCloseModal)="onSave($event)"></app-child-modal>

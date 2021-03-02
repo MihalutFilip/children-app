@@ -1,0 +1,66 @@
+.parent-mat-tab-group{
+    min-height: 800px;
+}
+
+.mat-elevation-z8 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.select-group{
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
+table {
+  width: 100%;
+}
+
+tr.mat-header-row {
+  font-weight: bold;
+}
+  
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
+}
+
+.mat-column-delete img {
+  width: 75% !important;
+  cursor: pointer;
+}
+
+.mat-column-delete button {
+  background: white;
+  padding: 0;
+}
+
+.mat-column-delete {
+  width: 4.5%;
+}
+
+.mat-column-edit img {
+  width: 75% !important;
+  cursor: pointer;
+}
+
+.mat-column-edit button {
+  background: white;
+  padding: 0;
+}
+
+.mat-column-edit {
+  width: 2.5%;
+}
+
+.dropdown-menu button {
+  cursor: pointer;
+}
+
+.export-button img {
+  max-height: 19px;
+  margin-top: -9px;
+}
+
+.export-button {
+  background: white;
+}
